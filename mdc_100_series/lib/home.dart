@@ -25,10 +25,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: return as AsymmetricView (104)
+    return AsymmetricView(
+        products: ProductsRepository.loadProducts(Category.all));
     // TODO: Pass Category variable toAssymmetricView (104)
     return Scaffold(
       appBar: AppBar(
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
         leading: IconButton(
           icon: Icon(Icons.menu),
           onPressed: () {
