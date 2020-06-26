@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
     // TODO: Pass Category variable toAssymmetricView (104)
     return Scaffold(
       appBar: AppBar(
-        brightness: Brightness.light,
+        brightness: Brightness.dark,
         leading: IconButton(
           icon: Icon(Icons.menu),
           onPressed: () {

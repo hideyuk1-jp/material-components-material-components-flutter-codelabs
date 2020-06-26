@@ -57,27 +57,20 @@ ThemeData _buildShrineTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
     accentColor: kShrineBrown900,
-    primaryColor: kShrinePink100,
+    primaryColor: kShrinePurple,
     buttonTheme: base.buttonTheme.copyWith(
-      buttonColor: kShrinePink100,
-      colorScheme: base.colorScheme.copyWith(
-        secondary: kShrineBrown900,
-      ),
-    ),
-    buttonBarTheme: base.buttonBarTheme.copyWith(
-      buttonTextTheme: ButtonTextTheme.accent,
+      buttonColor: kShrinePurple,
+      textTheme: ButtonTextTheme.primary,
+      colorScheme: ColorScheme.light().copyWith(primary: kShrinePurple),
     ),
     scaffoldBackgroundColor: kShrineBackgroundWhite,
-    cardColor: kShrineBackgroundWhite,
-    textSelectionColor: kShrinePink100,
-    errorColor: kShrineErrorRed,
     // TODO: Add the text themes (103)
     textTheme: _buildShrineTextTheme(base.textTheme),
     primaryTextTheme: _buildShrineTextTheme(base.primaryTextTheme),
     accentTextTheme: _buildShrineTextTheme(base.accentTextTheme),
     // TODO: Add the icon themes (103)
     primaryIconTheme: base.iconTheme.copyWith(
-      color: kShrineBrown900,
+      color: kShrineSurfaceWhite,
     ),
     // TODO: Decorate the inputs (103)
     inputDecorationTheme: InputDecorationTheme(
@@ -107,7 +100,5 @@ TextTheme _buildShrineTextTheme(TextTheme base) {
       )
       .apply(
         fontFamily: 'Rubik',
-        displayColor: kShrineBrown900,
-        bodyColor: kShrineBrown900,
       );
 }
