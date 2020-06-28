@@ -14,22 +14,47 @@
 
 import 'package:flutter/material.dart';
 
+import 'backdrop.dart';
+import 'colors.dart';
 import 'home.dart';
 import 'login.dart';
-import 'colors.dart';
+import 'category_menu_page.dart';
+import 'model/product.dart';
 import 'supplemental/cut_corners_border.dart';
 
 // TODO: Convert ShrineApp to stateful widget (104)
-class ShrineApp extends StatelessWidget {
+class ShrineApp extends StatefulWidget {
+  @override
+  _ShrineAppState createState() => _ShrineAppState();
+}
+
+class _ShrineAppState extends State<ShrineApp> {
+  Category _currentCategory = Category.all;
+
+  void _onCategoryTap(Category category) {
+    setState(() {
+      _currentCategory = category;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Shrine',
       // TODO: Change home: to a Backdrop with a HomePage frontLayer (104)
-      home: HomePage(),
-      // TODO: Make currentCategory field take _currentCategory (104)
-      // TODO: Pass _currentCategory for frontLayer (104)
-      // TODO: Change backLayer field value to CategoryMenuPage (104)
+      home: Backdrop(
+        // TODO: Make currentCategory field take _currentCategory (104)
+        currentCategory: _currentCategory,
+        // TODO: Pass _currentCategory for frontLayer (104)
+        frontLayer: HomePage(category: _currentCategory),
+        // TODO: Change backLayer field value to CategoryMenuPage (104)
+        backLayer: CategoryMenuPage(
+          currentCategory: _currentCategory,
+          onCategoryTap: _onCategoryTap,
+        ),
+        frontTitle: Text('SHRINE'),
+        backTitle: Text('MENU'),
+      ),
       initialRoute: '/login',
       onGenerateRoute: _getRoute,
       // TODO: Add a theme (103)
@@ -57,11 +82,15 @@ ThemeData _buildShrineTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
     accentColor: kShrineBrown900,
-    primaryColor: kShrinePurple,
+    primaryColor: kShrinePink100,
     buttonTheme: base.buttonTheme.copyWith(
-      buttonColor: kShrinePurple,
-      textTheme: ButtonTextTheme.primary,
-      colorScheme: ColorScheme.light().copyWith(primary: kShrinePurple),
+      buttonColor: kShrinePink100,
+      colorScheme: base.colorScheme.copyWith(
+        secondary: kShrineBrown900,
+      ),
+    ),
+    buttonBarTheme: base.buttonBarTheme.copyWith(
+      buttonTextTheme: ButtonTextTheme.accent,
     ),
     scaffoldBackgroundColor: kShrineBackgroundWhite,
     // TODO: Add the text themes (103)
@@ -70,7 +99,7 @@ ThemeData _buildShrineTheme() {
     accentTextTheme: _buildShrineTextTheme(base.accentTextTheme),
     // TODO: Add the icon themes (103)
     primaryIconTheme: base.iconTheme.copyWith(
-      color: kShrineSurfaceWhite,
+      color: kShrineBrown900,
     ),
     // TODO: Decorate the inputs (103)
     inputDecorationTheme: InputDecorationTheme(
@@ -100,5 +129,7 @@ TextTheme _buildShrineTextTheme(TextTheme base) {
       )
       .apply(
         fontFamily: 'Rubik',
+        displayColor: kShrineBrown900,
+        bodyColor: kShrineBrown900,
       );
 }
